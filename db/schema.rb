@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_04_125120) do
+ActiveRecord::Schema.define(version: 2022_03_04_131456) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,26 @@ ActiveRecord::Schema.define(version: 2022_03_04_125120) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "listings", force: :cascade do |t|
+    t.string "title"
+    t.integer "price"
+    t.boolean "sold", default: false
+    t.text "description"
+    t.string "suburb"
+    t.bigint "state_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "type_id", null: false
+    t.bigint "size_id", null: false
+    t.bigint "gender_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["gender_id"], name: "index_listings_on_gender_id"
+    t.index ["size_id"], name: "index_listings_on_size_id"
+    t.index ["state_id"], name: "index_listings_on_state_id"
+    t.index ["type_id"], name: "index_listings_on_type_id"
+    t.index ["user_id"], name: "index_listings_on_user_id"
   end
 
   create_table "sizes", force: :cascade do |t|
@@ -51,4 +71,9 @@ ActiveRecord::Schema.define(version: 2022_03_04_125120) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "listings", "genders"
+  add_foreign_key "listings", "sizes"
+  add_foreign_key "listings", "states"
+  add_foreign_key "listings", "types"
+  add_foreign_key "listings", "users"
 end
