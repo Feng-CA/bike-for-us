@@ -4,19 +4,13 @@
     <%@listings.each do |listing|%>
     <div class="col mb-4">
       <div class="card border-dark h-100">
-        <%if listing.picture.attached?%>
-          <%=image_tag listing.picture, alt: listing.title, class:"thumbnail card-img top"%>
-        <%else%>
+        
           <%=image_tag "bike.jpg", alt: "bike", class:"thumbnail card-img top"%>
-        <%end%>
+       
         <div class="card-body">
           <h5><%=listing.title%></h5>
           <p class="card-text text-secondary"><%=listing.description%></p>
-              <div class='d-flex justify-content-between'> 
-                <%=link_to "See More", listing_path(listing.id), class: "btn btn-outline-primary"%>
-                <h5><%=format_price(listing.price)%></h5>
-                <h5><%=format_state(listing.state)%></h5>
-              </div>
+              
         </div>
       </div>
     </div>
