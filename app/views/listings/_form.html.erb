@@ -15,31 +15,28 @@
     <%=f.select :type_id, @types.map {|t| [t.name, t.id]}, class: "form-select"%>
   </div>
 
-  <div class='form-group mb-3'> 
-    <%@genders.each do |option|%>
-      <%=f.label :gender_id, option.name, class: "form-label mr-1" %>
-      <%=f.radio_button :gender_id, option.id, class:"mr-2"%>
-    <%end%>
-  </div>
+  <h5 class="mb-3 ml-2">Gender</h5>
+  <%@genders.each do |option|%>
+    <%=f.label :gender_id, option.name, class: "form-label mr-1" %>
+    <%=f.radio_button :gender_id, option.id, class:"mr-2"%>
+  <%end%>
 
-  <div class='form-group mb-3'> 
-    <%@sizes.each do |option|%>
-      <%=f.label :size_id, option.name, class: "form-label mr-1" %>
-      <%=f.radio_button :size_id, option.id, class:"mr-2"%>
-    <%end%>
-  </div>
+  <h5 class="mb-3 ml-2">Size</h5>
+  <%@sizes.each do |option|%>
+    <%=f.label :size_id, option.name, class: "form-label mr-1" %>
+    <%=f.radio_button :size_id, option.id, class:"mr-2"%>
+  <%end%>
 
   <div class='form-group mb-3'> 
     <%=f.label :suburb, class: "form-label"%>
     <%=f.text_field :suburb%>
   </div>
 
-  <div class='form-group mb-3'>
-    <%@states.each do |option|%>
-      <%=f.label :state_id, option.name, class: "form-label mr-1" %>
-      <%=f.radio_button :state_id, option.id, class:"mr-2"%>
-    <%end%>
-  </div>  
+  <h5 class="mb-3 ml-2">State</h5>
+  <%@states.each do |option|%>
+    <%=f.label :state_id, option.name, class: "form-label mr-1" %>
+    <%=f.radio_button :state_id, option.id, class:"mr-2"%>
+  <%end%>
 
   <div class='form-group mb-3'> 
     <%=f.label :picture, class: "form-label"%>
