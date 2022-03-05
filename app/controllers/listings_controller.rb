@@ -3,7 +3,8 @@ class ListingsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   # refectors listing instance before show, edit, update and destory
   before_action :set_listing, only: [:show, :edit, :update, :destory]
-  
+  #This before action secures listings modificated only by authenticate user
+  before_action :authorize_user, only: [:edit, :update, :destroy]
   # This before action helps new and edit views
   before_action :set_form_vars, only: [:new, :edit]
 
