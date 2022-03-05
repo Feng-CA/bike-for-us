@@ -20,7 +20,7 @@ class ListingsController < ApplicationController
   def create
     @listing = current_user.listings.new(listing_params)
     if @listing.save 
-      redirect_to @listing, notice: "Listing successfully created"
+      redirect_to @listing, notice: "Your listing successfully created"
     else
       set_form_vars
       render "new", notice: "Something went wrong!"
@@ -34,7 +34,7 @@ class ListingsController < ApplicationController
   def update
     @listing.update(listing_params)
     if @listing.save 
-      redirect_to @listing, notice: "Listing successfully updated"
+      redirect_to @listing, notice: "Your listing successfully updated"
     else
       set_form_vars
       render "edit", notice: "Something went wrong"
@@ -42,7 +42,8 @@ class ListingsController < ApplicationController
   end
 
   def destory
-  
+    @listing.destroy
+    redirect_to listings_path, notice: "Your listing succesfully deleted"
   end
 
   private
