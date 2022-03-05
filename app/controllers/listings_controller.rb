@@ -1,9 +1,10 @@
 class ListingsController < ApplicationController
+
   # Sets up user access authentication except index and show page
   before_action :authenticate_user!, except: [:index, :show]
   # refectors listing instance before show, edit, update and destory
   before_action :set_listing, only: [:show, :edit, :update, :destory]
-  #This before action secures listings modificated only by authenticate user
+  #This before action secures listings modificated only by authorized user
   before_action :authorize_user, only: [:edit, :update, :destroy]
   # This before action helps new and edit views
   before_action :set_form_vars, only: [:new, :edit]
@@ -55,6 +56,13 @@ class ListingsController < ApplicationController
     params.require(:listing).permit(:title, :price, :type_id, :size_id, :gender_id, :suburb, :state_id, :description, :picture)
   end
 
+  def authorize_user 
+    if @listing.user_id != current_user.id
+      flash[:alert] = "You don't have permission to do that"
+      redirect_to listings_path
+    end 
+  end 
+
   def set_listing
     @listing = Listing.find(params[:id])
   end
@@ -65,6 +73,5 @@ class ListingsController < ApplicationController
     @genders = Gender.all
     @states = State.all
   end 
-
-
+  
 end
