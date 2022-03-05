@@ -4,4 +4,6 @@ class Listing < ApplicationRecord
   belongs_to :size
   belongs_to :state
   belongs_to :gender
+
+  has_one_attached :picture
 end
