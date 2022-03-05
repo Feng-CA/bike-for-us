@@ -3,8 +3,10 @@ class ListingsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   # refectors listing instance before show, edit, update and destory
   before_action :set_listing, only: [:show, :edit, :update, :destory]
+  
   # This before action helps new and edit views
   before_action :set_form_vars, only: [:new, :edit]
+
   def index
     @listings = Listing.all
   end
