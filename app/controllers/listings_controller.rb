@@ -10,7 +10,7 @@ class ListingsController < ApplicationController
   before_action :set_form_vars, only: [:new, :edit]
 
   def index
-    @listings = Listing.all
+    @listings = Listing.order("states.name").includes(:state)
   end
 
   def show
