@@ -14,4 +14,20 @@ class Listing < ApplicationRecord
   validates :title, :description, :price, :type, :size, :gender, :suburb, :state, presence: true 
   validates :title, length: {minimum: 4, maximum: 20}
   validates :description, length: {minimum: 4, maximum: 500}
+
+  # sanitise data with lifecycle hooks 
+  before_save :remove_whitespace
+  before_validation :convert_price_to_cents, if: :price_changed?
+
+  private
+
+  def remove_whitespace 
+    self.title = self.title.strip
+    self.description = self.description.strip
+  end
+
+  def convert_price_to_cents 
+    self.price = (self.attributes_before_type_cast["price"].to_f * 100).round
+  end 
+
 end
