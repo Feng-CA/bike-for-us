@@ -21,7 +21,7 @@
     <%=f.radio_button :gender_id, option.id, class:"mr-2"%>
   <%end%>
 
-  <h5 class="mb-3 ml-2">Size</h5>
+  <h5 class="mb-3 ml-2">Wheel Size</h5>
   <%@sizes.each do |option|%>
     <%=f.label :size_id, option.name, class: "form-label mr-1" %>
     <%=f.radio_button :size_id, option.id, class:"mr-2"%>

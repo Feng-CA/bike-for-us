@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_05_121958) do
+ActiveRecord::Schema.define(version: 2022_03_06_000249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,12 @@ ActiveRecord::Schema.define(version: 2022_03_05_121958) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "features", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "genders", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -67,6 +73,15 @@ ActiveRecord::Schema.define(version: 2022_03_05_121958) do
     t.index ["state_id"], name: "index_listings_on_state_id"
     t.index ["type_id"], name: "index_listings_on_type_id"
     t.index ["user_id"], name: "index_listings_on_user_id"
+  end
+
+  create_table "listings_features", force: :cascade do |t|
+    t.bigint "listing_id", null: false
+    t.bigint "feature_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["feature_id"], name: "index_listings_features_on_feature_id"
+    t.index ["listing_id"], name: "index_listings_features_on_listing_id"
   end
 
   create_table "sizes", force: :cascade do |t|
@@ -106,4 +121,6 @@ ActiveRecord::Schema.define(version: 2022_03_05_121958) do
   add_foreign_key "listings", "states"
   add_foreign_key "listings", "types"
   add_foreign_key "listings", "users"
+  add_foreign_key "listings_features", "features"
+  add_foreign_key "listings_features", "listings"
 end

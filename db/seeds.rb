@@ -41,3 +41,12 @@ if State.count == 0
     puts "created #{s} state"
   end
 end
+
+features = ["suspension", "disc brakes", "rim brakes", "aluminium", "fender", "basket", "reflector", "stand", "bell", "battery"]
+
+if Feature.count == 0 
+  features.each do |f| 
+    Feature.create(name: f)
+    puts "created #{f} feature"
+  end 
+end
