@@ -53,7 +53,7 @@ class ListingsController < ApplicationController
   private
 
   def listing_params
-    params.require(:listing).permit(:title, :price, :type_id, :size_id, :gender_id, :suburb, :state_id, :description, :picture)
+    params.require(:listing).permit(:title, :price, :type_id, :size_id, :gender_id, :suburb, :state_id, :description, :picture, feature_ids: [])
   end
 
   def authorize_user 
@@ -72,6 +72,7 @@ class ListingsController < ApplicationController
     @sizes = Size.all
     @genders = Gender.all
     @states = State.all
+    @features = Feature.all
   end 
   
 end

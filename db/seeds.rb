@@ -42,7 +42,7 @@ if State.count == 0
   end
 end
 
-features = ["suspension", "disc brakes", "rim brakes", "aluminium", "fender", "basket", "reflector", "stand", "bell", "battery"]
+features = ["Suspension", "Disc brakes", "Rear Rack", "Aluminium", "Fender", "Basket", "Reflector", "Stand", "Bell", "Battery"]
 
 if Feature.count == 0 
   features.each do |f| 
