@@ -22,7 +22,6 @@
     <p><%=@listing.description%></p>
 
     <div class='container'>
-    
       <%if current_user && current_user.id == @listing.user_id%>
         <div class='d-flex justify-content-equally'>
           <%= link_to "Edit", edit_listing_path(@listing.id), class: "btn btn-warning mr-2" %>

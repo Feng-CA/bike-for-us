@@ -2,8 +2,8 @@ class ListingsController < ApplicationController
 
   # Sets up user access authentication except index and show page
   before_action :authenticate_user!, except: [:index, :show]
-  # refectors listing instance before show, edit, update and destory
-  before_action :set_listing, only: [:show, :edit, :update, :destory]
+  # refectors listing instance before show, edit, update and destroy
+  before_action :set_listing, only: [:show, :edit, :update, :destroy]
   #This before action secures listings modificated only by authorized user
   before_action :authorize_user, only: [:edit, :update, :destroy]
   # This before action helps new and edit views
@@ -45,7 +45,7 @@ class ListingsController < ApplicationController
     end 
   end
 
-  def destroy
+  def destroy 
     @listing.destroy
     redirect_to listings_path, notice: "Your listing succesfully deleted"
   end
@@ -73,6 +73,5 @@ class ListingsController < ApplicationController
     @genders = Gender.all
     @states = State.all
     @features = Feature.all
-  end 
-  
+  end   
 end
