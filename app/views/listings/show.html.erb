@@ -21,9 +21,13 @@
     <h5 class='text-muted mb-3'>Price: <%=format_price(@listing.price)%></h5>
     <p><%=@listing.description%></p>
 
-    
-    <button data-stripe='payment'>Buy:<%=format_price(@listing.price)%></button>
-      
+    <%if current_user && @listing.sold == false %>
+      <button class='btn btn-primary mb-3 pr-2' data-stripe='payment'>Buy:<%=format_price(@listing.price)%></button>
+    <%elsif @listing.sold%> 
+      <button class='btn btn-secondary' disabled>SOLD</button>
+    <%else%>
+     <%=button_to "Login to buy", new_user_session_path, class: "btn btn-info"%>
+    <%end%>
     
     <div class='container'>
       <%if current_user && current_user.id == @listing.user_id%>
