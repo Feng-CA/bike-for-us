@@ -21,6 +21,10 @@
     <h5 class='text-muted mb-3'>Price: <%=format_price(@listing.price)%></h5>
     <p><%=@listing.description%></p>
 
+    
+    <button data-stripe='payment'>Buy:<%=format_price(@listing.price)%></button>
+      
+    
     <div class='container'>
       <%if current_user && current_user.id == @listing.user_id%>
         <div class='d-flex justify-content-equally'>
@@ -32,3 +36,15 @@
   </div>
 
 </section>
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+document
+  .querySelector("[data-stripe='payment']")
+  .addEventListener("click", () => {
+    const stripe = Stripe("<%=Rails.application.credentials.dig(:stripe, :public_key)%>");
+    
+    stripe.redirectToCheckout({
+      sessionId: "<%=@session_id%>"
+    });
+  })
+</script>
