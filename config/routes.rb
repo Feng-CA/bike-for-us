@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
  
-  get 'payment/success'
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: "pages#home"
@@ -14,4 +13,5 @@ Rails.application.routes.draw do
   get "listings/:id/edit", to: "listings#edit", as: "edit_listing"
   get "payments/success/:id", to: "payments#success", as: "payments_success"
   post "payments/webhook", to: "payments#webhook"
+  post "payments", to: "payments#create_checkout_session", as: "create_checkout_session"
 end
