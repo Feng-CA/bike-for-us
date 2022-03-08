@@ -22,13 +22,15 @@
     <p><%=@listing.description%></p>
 
     <%if current_user && @listing.sold == false %>
-      <%=button_to "Buy: #{format_price(@listing.price)}", 
-        create_checkout_session_path,
-        remote: true,
-        method: :post,
-        params: {id: @listing.id},
-        class: 'btn btn-primary mb-3 pr-2',
-        data: {disable_with: "Loading..."}%>
+      <%if current_user.id != @listing.user_id%>
+        <%=button_to "Buy: #{format_price(@listing.price)}", 
+          create_checkout_session_path,
+          remote: true,
+          method: :post,
+          params: {id: @listing.id},
+          class: 'btn btn-primary mb-3 pr-2',
+          data: {disable_with: "Loading..."}%>
+      <%end%>
     <%elsif @listing.sold%> 
       <button class='btn btn-secondary' disabled>SOLD</button>
     <%else%>
