@@ -1,5 +1,17 @@
-<h1 class="hero-title text-center">Bike Listings</h1>
+<h1 class="hero-title text-center">All Bikes Listings</h1>
 <section class="container">
+  <div class='d-flex justify-content-between'>
+    <div class="mr-auto p-2">
+      <%= render 'listings/search_form.html.erb' %>
+    </div>
+    <div class='ml-auto p-2'>
+      <%= sort_link(@q, :price, "Price", default_order: :desc) %>
+      <%= sort_link(@q, :size_id, "Size", default_order: :desc) %>
+      <%= sort_link(@q, :state_id, "State", default_order: :desc) %>
+      <%= sort_link(@q, :updated_at, "Updated time", default_order: :desc) %>
+    </div>
+  </div>
+
   <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-4">
     <%@listings.each do |listing|%>
     <div class="col mb-4">

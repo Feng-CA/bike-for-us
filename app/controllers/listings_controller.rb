@@ -9,9 +9,12 @@ class ListingsController < ApplicationController
   # This before action defines instance of objects in Models to help presenting in new and edit views
   before_action :set_form_vars, only: %i[new edit]
 
-  # SELECT * FROM listing TABLE ORDER BY "states.name" & SELECT * FROM state TABLE
+  
   def index
-    @listings = Listing.order("states.name").includes(:state)
+    # SELECT * FROM listing TABLE ORDER BY "states.name" & SELECT * FROM state TABLE
+    # @listings = Listing.order("states.name").includes(:state)
+    @q = Listing.ransack(params[:q])
+    @listings = @q.result(distinct: true)
   end
 
   def show
