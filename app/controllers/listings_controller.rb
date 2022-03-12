@@ -1,53 +1,31 @@
 class ListingsController < ApplicationController
 
   # Sets up user access authentication except index and show page
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: %i[index show]
   # refectors listing instance variable before show, edit, update and destroy
-  before_action :set_listing, only: [:show, :edit, :update, :destroy]
+  before_action :set_listing, only: %i[show edit update destroy]
   #This before action secures listings modificated only by authorized user
-  before_action :authorize_user, only: [:edit, :update, :destroy]
-  # This before action helps new and edit views
-  before_action :set_form_vars, only: [:new, :edit]
+  before_action :authorize_user, only: %i[edit update destroy]
+  # This before action defines instance of objects in Models to help presenting in new and edit views
+  before_action :set_form_vars, only: %i[new edit]
 
+  # SELECT * FROM listing TABLE ORDER BY "states.name" & SELECT * FROM state TABLE
   def index
     @listings = Listing.order("states.name").includes(:state)
   end
 
   def show
 
-    session = Stripe::Checkout::Session.create(
-      payment_method_types: ['card'],
-      customer_email:current_user && current_user.email, 
-      line_items: [
-        {
-          name: @listing.title,
-          description: @listing.description,
-          amount: @listing.price, 
-          currency: 'aud',
-          quantity: 1
-        }
-      ],
-      payment_intent_data: {
-        metadata: {
-          user_id: current_user && current_user.id, 
-          listing_id: @listing.id
-        }
-      },
-      success_url: "#{root_url}payments/success/#{@listing.id}",
-      cancel_url: root_url
-    )
-
-    @session_id = session.id
-   
   end
-
+  
   def new
     @listing = Listing.new
   end
 
+  # Since listings table belongs to users table, a user can have many listings, current_user is a record in the users table referenced in the listings table, so current_user can create a new listing with required values.
   def create
     @listing = current_user.listings.new(listing_params)
-    if @listing.save 
+    if @listing.save
       redirect_to @listing, notice: "Your listing successfully created"
     else
       set_form_vars
@@ -59,6 +37,7 @@ class ListingsController < ApplicationController
   
   end
 
+  # UPDATE listings TABLE SET columns with required values WHERE "listings"."id" = current listing
   def update
     @listing.update(listing_params)
     if @listing.save 
@@ -69,6 +48,7 @@ class ListingsController < ApplicationController
     end 
   end
 
+  # DELETE FROM listings TABLE WHERE "listings"."id" = current listing
   def destroy 
     @listing.destroy
     redirect_to listings_path, notice: "Your listing succesfully deleted"
@@ -76,26 +56,30 @@ class ListingsController < ApplicationController
 
   private
 
+  # SETS UP POST PARAMS PERMESSION ON NEW LISTING FORM
   def listing_params
     params.require(:listing).permit(:title, :price, :type_id, :size_id, :gender_id, :suburb, :state_id, :description, :picture, feature_ids: [])
   end
 
-  def authorize_user 
-    if @listing.user_id != current_user.id
-      flash[:alert] = "You don't have permission to do that"
-      redirect_to listings_path
-    end 
-  end 
+  # DEFINE USER AUTHORIZATION FOR ALLOWING ONLY LISTING OWNER CAN AND DELETE OWN LISTING
+  def authorize_user
+      if@listing.user_id != current_user.id
+        flash[:alert] = "You don't have permission to do that"
+        redirect_to listings_path
+      end
+  end
 
+  # SETS LISTING BEFORE LOADING A LISTING PAGE
   def set_listing
     @listing = Listing.find(params[:id])
   end
 
+  # SETS INSTANCE VARIABLES FOR HELPING FORM TO PRESENTING DATA
   def set_form_vars
     @types = Type.all
     @sizes = Size.all
     @genders = Gender.all
     @states = State.all
     @features = Feature.all
-  end   
+  end
 end

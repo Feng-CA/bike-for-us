@@ -1,13 +1,16 @@
 class PaymentsController < ApplicationController
+  # SKIP VARIFICATION FOR AUTHENTICATION TOKEN FROM STRIPE POST REQUEST TO WEBHOOK METHOD
   skip_before_action :verify_authenticity_token, only: [:webhook]
   
+  # SHOW SUCCESS ORDER OF THE LISTING
   def success
     @order = Order.find_by(listing_id: params[:id])
   end
 
+  # CREATE NEW STRIPE CHECKOUT SESSION ONCE CLICK THE BUY BUTTON
   def create_checkout_session
     @listing = Listing.find(params[:id]) 
-
+    
     session = Stripe::Checkout::Session.create(
       payment_method_types: ['card'],
       customer_email:current_user && current_user.email, 
@@ -59,7 +62,8 @@ class PaymentsController < ApplicationController
     pp payment.charges.data[0].receipt_url
     @listing = Listing.find(listing_id)
     @listing.update(sold: true)
-    # CREATE ORDER/PURCHASE AND TRACK EXTRA INFO 
-   Order.create(listing_id: listing_id, seller_id: @listing.user_id, buyer_id: buyer_id, payment_id: payment_intent_id, receipt_url: payment.charges.data[0].receipt_url  )
+
+  # CREATE ORDER AND TRACK EXTRA INFO 
+  Order.create(listing_id: listing_id, seller_id: @listing.user_id, buyer_id: buyer_id, payment_id: payment_intent_id, receipt_url: payment.charges.data[0].receipt_url  )
   end
 end
