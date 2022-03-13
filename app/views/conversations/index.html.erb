@@ -1,0 +1,43 @@
+<h1>My Inbox</h1>
+<div class="panel panel-group">
+  <div class="list-group col-md-6">
+    <ul class="nav nav-pills nav-stacked">
+      <li>
+        <button type="button" class="list-group-item" data-toggle="collapse" data-target="#mail">
+          <h3 class="panel-heading ml-2 p-2 btn-link">Conversations</h3>
+        </button>
+          <div class="collapse" id="mail">
+            <h4 class="ml-4 p-2">All Chats:</h4>
+            <div class="panel-body ml-4">
+              <% @conversations.each do |conversation| %>
+                <%if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
+                  <%if conversation.sender_id == current_user.id %>
+                    <% recipient = User.find(conversation.recipient_id) %>
+                  <%else%>
+                    <% recipient = User.find(conversation.sender_id) %>
+                  <%end%>
+                  <h4><%= link_to recipient.email, conversation_messages_path(conversation)%></h4>
+                <%end%>
+              <%end%>
+            </div>
+          </div>  
+      </li>
+      <li>
+        <button type="button" class="list-group-item" data-toggle="collapse" data-target="#new">
+          <h3 class="panel-heading ml-2 p-2 btn-link">New Message</h3>
+        </button>
+          <div class="collapse" id="new">
+            <h4 class="ml-4 p-2">All Users:</h4>
+            <div class="panel-body ml-4">
+              <% @users.each do |user| %>
+                <%if user.id != current_user.id %>
+                  <h4><%= link_to user.email, conversations_path(sender_id: current_user.id, recipient_id: user.id), method: "post"%></h4>
+                <%end%>
+              <%end%>
+            </div>
+          </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
