@@ -1,17 +1,15 @@
-<div class="panel panel-default">
+<div class="messages-background col-md">
  <%=link_to 'Back To Inbox', conversations_path, class: 'btn btn-link ml-2 p-2' %>
 
  <% @messages.each do |message| %>
   <%if message.body %>
    <% user = User.find(message.user_id) %>
-      <div class="panel-heading">
-        <div class="header ml-3">
-          <strong><%= user.email %></strong><%= message.message_time %>
-        </div>
-        <div class="list ml-4 p-2">
-          <%= message.body %>
-        </div>
-      </div>
+    <div class="header ml-3">
+      <strong><%= user.email %></strong><%= message.message_time %>
+    </div>
+    <div class="list ml-4 p-2">
+      <%= message.body %>
+    </div>
   <%end%>
  <%end%>
 
