@@ -28,15 +28,15 @@
         <li>
           <div class="collapse" id="new">
             <div class="card-body ml-auto">
-              <%if current_user.id != admin_id%>
+              <%if current_user.id != admin.id%>
                 <h4 class="ml-2 p-2">Admin:</h4>
-                <h5><%= link_to admin.email, conversations_path(sender_id: current_user.id, recipient_id: admin_id), method: "post", class: "user-email"%></h5>
+                <h5><%= link_to admin.id, conversations_path(sender_id: current_user.id, recipient_id: admin.id), method: "post", class: "user-email"%></h5>
               <%end%>
             </div>
             <h4 class="ml-2 p-2">All Users:</h4>
             <div class="card-body ml-4">
               <% @users.each do |user| %>
-                <%if user.id != current_user.id && user.id != admin_id%>
+                <%if user.id != current_user.id && user.id != admin.id%>
                   <h5><%= link_to user.email, conversations_path(sender_id: current_user.id, recipient_id: user.id), method: "post", class: "user-email"%></h5>
                 <%end%>
               <%end%>
