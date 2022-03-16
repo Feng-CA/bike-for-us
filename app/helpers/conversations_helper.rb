@@ -1,5 +1,5 @@
 module ConversationsHelper
-  def admin
+  def admin_user
     @users.find_by(admin:true)
   end 
 end
