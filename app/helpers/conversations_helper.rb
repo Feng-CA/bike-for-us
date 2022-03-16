@@ -1,5 +1,5 @@
 module ConversationsHelper
-  def admin
-    admin = @users.find_by(admin:true)
+  def admin_id
+    @users.find_by(admin:true).id
   end 
 end
