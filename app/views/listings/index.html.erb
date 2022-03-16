@@ -1,15 +1,19 @@
-<h1 class="hero-title text-center">All Bikes Listings</h1>
-<section class="container">
+<section class="container bg-light">
+<h1 class="hero-title text-center">All Listings</h1>
   <div class='d-flex justify-content-between'>
-    <div class="mr-auto p-2">
+    <div class="btn btn-outline-info mb-2 p-2">
       <%= render 'listings/search_form.html.erb' %>
     </div>
-    <div class='ml-auto p-2'>
-      <%= sort_link(@q, :price, "Price", default_order: :desc) %>
-      <%= sort_link(@q, :size_id, "Size", default_order: :desc) %>
-      <%= sort_link(@q, :state_id, "State", default_order: :desc) %>
-      <%= sort_link(@q, :updated_at, "Updated time", default_order: :desc) %>
-    </div>
+
+    <div class="btn-group sort-btn">
+      <button class="btn btn-outline-info mb-2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort by</button>
+      <ul class="dropdown-menu p-2">
+        <li class="ml-2"><%= sort_link(@q, :price, "Price", default_order: :desc) %></li>
+        <li class="ml-2"><%= sort_link(@q, :size_id, "Size", default_order: :desc) %></li>
+        <li class="ml-2"><%= sort_link(@q, :state_id, "State", default_order: :desc) %></li>
+        <li class="ml-2"><%= sort_link(@q, :created_at, "Time", default_order: :desc) %></li>
+      </ul>
+	  </div>
   </div>
 
   <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-4">

@@ -9,3 +9,13 @@ h4{
 .user-email {
   color: rgb(52, 4, 92);
 }
+
+.conversations-background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  width: 100%;
+  background-image: url(image-path('message-background.jpg'));
+  background-size: cover;
+}

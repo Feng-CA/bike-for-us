@@ -21,7 +21,7 @@
     <h5 class='text-muted mb-3'>Price: <%=format_price(@listing.price)%></h5>
     <p><%=@listing.description%></p>
 
-    <div class='d-flex justify-content-around'>
+    <div class='d-flex justify-content-equally'>
       <div class="mr-auto p-2">
         <%if current_user && @listing.sold == false %>
           <%if current_user.id != @listing.user_id%>
@@ -38,7 +38,7 @@
         <%end%>
       </div>
     <%elsif @listing.sold%> 
-      <button class='btn btn-secondary' disabled>SOLD</button>
+      <button class='btn btn-secondary mb-3 ml-3' disabled>SOLD</button>
     <%else%>
      <%=button_to "Login to buy", new_user_session_path, class: "btn btn-info"%>
     <%end%>

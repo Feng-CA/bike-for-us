@@ -1,15 +1,13 @@
-<div class="main-background">
-  <h2 class="mr-5">My Inbox</h2>
-    <div class="list-group col-md-6">
-      <div class="panel panel-default">
-      <ul class="nav nav-pills nav-stacked">
-        <li>
-          <button type="button" class="list-group-item" data-toggle="collapse" data-target="#mail">
-            <h3 class="panel-heading ml-2 p-2 btn-link">Conversations</h3>
-          </button>
+<div class="conversations-background">
+    <div class="list-group">
+    <h1 class="ml-auto mr-auto mb-5">My Inbox</h1>
+      <div class="card text-center">
+        <h3 class="card-header list-group-item btn-link" data-toggle="collapse" data-target="#mail">Conversations</h3>
+        <ul class="nav nav-pills nav-stacked">
+          <li>
             <div class="collapse" id="mail">
               <h4 class="ml-4 p-2">All Chats:</h4>
-              <div class="panel-body ml-4">
+              <div class="card-body ml-4">
                 <% @conversations.each do |conversation| %>
                   <%if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
                     <%if conversation.sender_id == current_user.id %>
@@ -22,20 +20,21 @@
                 <%end%>
               </div>
             </div>  
-        </li>
-        <li>
-          <button type="button" class="list-group-item" data-toggle="collapse" data-target="#new">
-            <h3 class="panel-heading ml-2 p-2 btn-link">New Message</h3>
-          </button>
+          </li>
+        </ul>
+      
+        <h3 class="card-header list-group-item btn-link" data-toggle="collapse" data-target="#new">New Message</h3>
+        <ul class="nav nav-pills nav-stacked">
+          <li>
             <div class="collapse" id="new">
-              <div class="panel-body ml-4">
+              <div class="card-body ml-auto">
                 <%if current_user.id != admin.id%>
-                  <h4 class="ml-4 p-2">Admin:</h4>
-                  <h4><%= link_to admin.email, conversations_path(sender_id: current_user.id, recipient_id: admin.id), method: "post", class: "user-email"%></h4>
+                  <h4 class="ml-2 p-2">Admin:</h4>
+                  <h5><%= link_to admin.email, conversations_path(sender_id: current_user.id, recipient_id: admin.id), method: "post", class: "user-email"%></h5>
                 <%end%>
               </div>
-              <h4 class="ml-4 p-2">All Users:</h4>
-              <div class="panel-body ml-4">
+              <h4 class="ml-2 p-2">All Users:</h4>
+              <div class="card-body ml-4">
                 <% @users.each do |user| %>
                   <%if user.id != current_user.id && user.id != admin.id%>
                     <h5><%= link_to user.email, conversations_path(sender_id: current_user.id, recipient_id: user.id), method: "post", class: "user-email"%></h5>
@@ -48,3 +47,8 @@
     </div>
   </div>
 </div>
+
+
+
+  
+  
