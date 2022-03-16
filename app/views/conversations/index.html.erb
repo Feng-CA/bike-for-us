@@ -30,7 +30,7 @@
             <div class="card-body ml-auto">
               <%if current_user.id != admin.id%>
                 <h4 class="ml-2 p-2">Admin:</h4>
-                <h5><%= link_to admin.id, conversations_path(sender_id: current_user.id, recipient_id: admin.id), method: "post", class: "user-email"%></h5>
+                <h5><%= link_to admin.email, conversations_path(sender_id: current_user.id, recipient_id: admin.id), method: "post", class: "user-email"%></h5>
               <%end%>
             </div>
             <h4 class="ml-2 p-2">All Users:</h4>
