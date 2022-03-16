@@ -28,7 +28,7 @@
         <li>
           <div class="collapse" id="new">
             <div class="card-body ml-auto">
-              <%if current_user.id != @users.find_by(admin:true).id%>
+              <%if not admin?%>
                 <h4 class="ml-2 p-2">Admin:</h4>
                 <h5><%= link_to admin.email, conversations_path(sender_id: current_user.id, recipient_id: admin.id), method: "post", class: "user-email"%></h5>
               <%end%>
