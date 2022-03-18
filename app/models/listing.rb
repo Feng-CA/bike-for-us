@@ -24,6 +24,7 @@ class Listing < ApplicationRecord
   # remove whitespace after title
   def remove_whitespace 
     self.title = self.title.strip
+    self.suburb = self.suburb.strip
     self.description = self.description.strip
   end
 

@@ -1,40 +1,42 @@
-<section class="container bg-light">
-<h1 class="hero-title text-center">All Listings</h1>
-  <div class='d-flex justify-content-between'>
-    <div class="btn btn-outline-info mb-2 p-2">
-      <%= render 'listings/search_form.html.erb' %>
-    </div>
+<div class="bg-light">
+  <section class="container">
+  <h1 class="hero-title text-center">All Listings</h1>
+    <div class='d-flex justify-content-between'>
+      <div class="btn btn-outline-info mb-2 p-2">
+        <%= render 'listings/search_form.html.erb' %>
+      </div>
 
-    <div class="btn-group sort-btn">
-      <button class="btn btn-outline-info mb-2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort by</button>
-      <ul class="dropdown-menu p-2">
-        <li class="ml-2"><%= sort_link(@q, :price, "Price", default_order: :desc) %></li>
-        <li class="ml-2"><%= sort_link(@q, :size_id, "Size", default_order: :desc) %></li>
-        <li class="ml-2"><%= sort_link(@q, :state_id, "State", default_order: :desc) %></li>
-        <li class="ml-2"><%= sort_link(@q, :created_at, "Time", default_order: :desc) %></li>
-      </ul>
-	  </div>
-  </div>
-
-  <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-4">
-    <%@listings.each do |listing|%>
-    <div class="col mb-4">
-      <div class="card border-dark h-100">
-        <%if listing.picture.attached?%>
-          <%=image_tag listing.picture, alt: listing.title, class:"thumbnail card-img top"%>
-        <%else%>
-          <%=image_tag "bike.jpg", alt: "bike", class:"thumbnail card-img top"%>
-        <%end%>
-        <div class="card-body">
-          <h5><%=listing.title%></h5>
-          <p class="card-text text-secondary"><%=listing.description%></p>
-              <div class='d-flex justify-content-between'> 
-                <%=link_to "See More", listing_path(listing.id), class: "btn btn-outline-primary"%>
-                <h5><%=format_price(listing.price)%></h5>
-              </div>
-        </div>
+      <div class="btn-group sort-btn">
+        <button class="btn btn-outline-info mb-2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort by</button>
+        <ul class="dropdown-menu p-2">
+          <li class="ml-2"><%= sort_link(@q, :price, "Price", default_order: :desc) %></li>
+          <li class="ml-2"><%= sort_link(@q, :size_id, "Size", default_order: :desc) %></li>
+          <li class="ml-2"><%= sort_link(@q, :state_id, "State", default_order: :desc) %></li>
+          <li class="ml-2"><%= sort_link(@q, :created_at, "Time", default_order: :desc) %></li>
+        </ul>
       </div>
     </div>
-    <%end%>
-  </div>
-</section>
+
+    <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-4">
+      <%@listings.each do |listing|%>
+      <div class="col mb-4">
+        <div class="card border-dark h-100">
+          <%if listing.picture.attached?%>
+            <%=image_tag listing.picture, alt: listing.title, class:"thumbnail card-img top"%>
+          <%else%>
+            <%=image_tag "bike.jpg", alt: "bike", class:"thumbnail card-img top"%>
+          <%end%>
+          <div class="card-body">
+            <h5><%=listing.title%></h5>
+            <p class="card-text text-secondary"><%=listing.description%></p>
+                <div class='d-flex justify-content-between'> 
+                  <%=link_to "See More", listing_path(listing.id), class: "btn btn-outline-primary"%>
+                  <h5><%=format_price(listing.price)%></h5>
+                </div>
+          </div>
+        </div>
+      </div>
+      <%end%>
+    </div>
+  </section>
+</div>

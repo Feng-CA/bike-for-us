@@ -40,10 +40,15 @@ They both want to achive their goals through this website with lower cost for se
 * Rails
 * Postgresql
 * bootstrap
-* Devise
-* AWS
-* Stripe
-* Heroku
+* jquery
+* popper.js
+* ransack
+* factory_bot_rails
+* rails_admin
+* devise
+* aws-sdk-s3
+* stripe
+* heroku
 
 # R12. User stories for the app
 - As a bike seller, I want to sign up for an account using my email address so  I can list my bike to sell.

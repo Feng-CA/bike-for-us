@@ -9,11 +9,9 @@ class ListingsController < ApplicationController
   # This before action defines instance of objects in Models to help presenting in new and edit views
   before_action :set_form_vars, only: %i[new edit]
 
-  
+  # SELECT * FROM listings table ORDER BY "updated_at" "desc";
   def index
-    # SELECT * FROM listing TABLE ORDER BY "states.name" & SELECT * FROM state TABLE
-    # @listings = Listing.order("states.name").includes(:state)
-    @q = Listing.ransack(params[:q])
+    @q = Listing.order(updated_at: :desc).ransack(params[:q])
     @listings = @q.result(distinct: true)
   end
 
@@ -21,11 +19,13 @@ class ListingsController < ApplicationController
 
   end
   
+  # CREATE NEW MESSAGE
   def new
     @listing = Listing.new
   end
 
   # Since listings table belongs to users table, a user can have many listings, current_user is a record in the users table referenced in the listings table, so current_user can create a new listing with required values.
+  # INSERT INTO listings table (column1, ...) VALUES (value1, ...)
   def create
     @listing = current_user.listings.new(listing_params)
     if @listing.save
@@ -40,7 +40,7 @@ class ListingsController < ApplicationController
   
   end
 
-  # UPDATE listings TABLE SET columns with required values WHERE "listings"."id" = current listing
+  # UPDATE listings table SET column1 = value1, ... WHERE listingID = current listing_id;
   def update
     @listing.update(listing_params)
     if @listing.save 

@@ -1,9 +1,10 @@
 class ConversationsController < ApplicationController
   before_action :authenticate_user!
 
+  # creates eager loading for conversations view
   def index
-    @users = User.all
-    @conversations = Conversation.all
+    @users = User.order(created_at: :desc).includes(:listings)
+    @conversations = Conversation.order(created_at: :desc).includes(:sender, :recipient)
   end
 
   def create
