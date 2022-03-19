@@ -29,10 +29,16 @@ module BikeForUs
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    # config.time_zone = "Central Time (US & Canada)"
+    config.time_zone = "Melbourne"
+    config.active_record.default_timezone = :local
     # config.eager_load_paths << Rails.root.join("extras")
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+     # add support for custom environments in heroku
+     if ENV["PIPE_ENV"].present?
+      Rails.application.config.credentials.content_path = Rails.root.join("config/credentials/#{ENV["PIPE_ENV"]}.yml.enc")
+    end
   end
 end

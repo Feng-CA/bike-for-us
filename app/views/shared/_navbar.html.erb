@@ -1,24 +1,40 @@
-<nav class="navbar navbar-light navbar-expand-md sticky-top">
+<nav class="navbar navbar-light navbar-expand-md sticky-top" style="background-color: #e3f2fd;">
   <div class="container-fluid">
     <%=link_to "Bike-For-Us", root_path, class: "navbar-brand"%>
   </div>
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <ul class="navbar-nav mr-5-lg">
-     <li class="nav-item">
-      <%=link_to "Home Page", root_path, class: "nav-link"%>
-     </li>
-    
-    <%if user_signed_in?%>
-    
-     <li class="nav-item">
-      <%=link_to "Log Out", destroy_user_session_path, method: :delete, class: "nav-link"%>
-     </li>
-    <%else%>
-     <li class="nav-item">
-      <%= link_to "Log in", new_user_session_path, class: "nav-link"%>
-     </li>
-    <%end%>
-
-  </ul>
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav mr-5-lg" style="white-space: nowrap;">
+        <li class="nav-item">
+          <%=link_to "All Listings", listings_path, class: "nav-link"%>
+        </li>
+        <%if user_signed_in?%>
+        <li class="nav-item">
+          <%= link_to "Admin Panel", rails_admin_path, class:"btn btn-outline-info mb-2 lg:mr-2 lg:mb-0 block" if admin? %>
+        </li>
+        <li class="nav-item">
+          <%=link_to "Create Listing", new_listing_path, class: "nav-link"%>
+        </li>
+        <li class="nav-item">
+          <%=link_to "My Inbox", conversations_path, class: "nav-link"%>
+        </li>
+        <li class="nav-item">
+          <%=link_to "Log Out", destroy_user_session_path, method: :delete, class: "nav-link"%>
+        </li>
+        <%else%>
+        <li class="nav-item">
+          <%= link_to "Log in", new_user_session_path, class: "nav-link"%>
+        </li>
+        <li class="nav-item active">
+          <%=link_to "Sign up", new_user_registration_path, class: "nav-link btn btn-outline-info"%>
+        </li>
+        <%end%>
+      </ul>
+    </div>
 
 </nav>

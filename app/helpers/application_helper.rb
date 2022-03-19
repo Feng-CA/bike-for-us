@@ -11,4 +11,8 @@ module ApplicationHelper
       return 'info'
     end 
   end 
+
+  def admin?
+    user_signed_in? && current_user.admin?
+  end
 end

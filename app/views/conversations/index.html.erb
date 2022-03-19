@@ -1,0 +1,54 @@
+<div class="conversations-background">
+  <div class="list-group">
+    <h1 class="ml-auto mr-auto mb-5">My Inbox</h1>
+    <div class="card text-center">
+      <h3 class="card-header list-group-item btn-link" data-toggle="collapse" data-target="#mail">Conversations</h3>
+      <ul class="nav nav-pills nav-stacked">
+        <li>
+          <div class="collapse" id="mail">
+            <h4 class="ml-4 p-2">All Chats:</h4>
+            <div class="card-body ml-4">
+              <% @conversations.each do |conversation| %>
+                <%if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
+                  <%if conversation.sender_id == current_user.id %>
+                    <% recipient = User.find(conversation.recipient_id) %>
+                  <%else%>
+                    <% recipient = User.find(conversation.sender_id) %>
+                  <%end%>
+                  <h5><%= link_to recipient.email, conversation_messages_path(conversation), class: "user-email"%></h5>
+                <%end%>
+              <%end%>
+            </div>
+          </div>  
+        </li>
+      </ul>
+    
+      <h3 class="card-header list-group-item btn-link" data-toggle="collapse" data-target="#new">New Message</h3>
+      <ul class="nav nav-pills nav-stacked">
+        <li>
+          <div class="collapse" id="new">
+            <div class="card-body ml-auto">
+              <%if not admin?%>
+                <h4 class="ml-2 p-2">Admin:</h4>
+                <h5><%= link_to admin_user.email, conversations_path(sender_id: current_user.id, recipient_id: admin_user.id), method: "post", class: "user-email"%></h5>
+              <%end%>
+            </div>
+            <h4 class="ml-2 p-2">All Users:</h4>
+            <div class="card-body ml-4">
+              <% @users.each do |user| %>
+                <%if user.id != current_user.id && user.id != admin_user.id%>
+                  <h5><%= link_to user.email, conversations_path(sender_id: current_user.id, recipient_id: user.id), method: "post", class: "user-email"%></h5>
+                <%end%>
+              <%end%>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+
+  
+  
