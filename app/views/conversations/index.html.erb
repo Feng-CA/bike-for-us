@@ -6,7 +6,7 @@
       <ul class="nav nav-pills nav-stacked">
         <li>
           <div class="collapse" id="mail">
-            <h4 class="ml-4 p-2">All Chats:</h4>
+            <h4 class="ml-2 p-2">All Chats:</h4>
             <div class="card-body ml-4">
               <% @conversations.each do |conversation| %>
                 <%if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
