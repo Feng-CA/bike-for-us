@@ -72,12 +72,12 @@ class ListingsController < ApplicationController
       end
   end
 
-  # SETS LISTING BEFORE LOADING A LISTING PAGE
+  # SETS LISTING INSTANCE BEFORE LOADING A LISTING PAGE
   def set_listing
     @listing = Listing.find(params[:id])
   end
 
-  # SETS INSTANCE VARIABLES FOR HELPING FORM TO PRESENTING DATA
+  # SETS OBJECTS INSTANCE VARIABLES FOR HELPING FORM TO PRESENTING DATA
   def set_form_vars
     @types = Type.all
     @sizes = Size.all
