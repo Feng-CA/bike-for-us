@@ -10,28 +10,33 @@
     <!-- Navbar links -->
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav mr-5-lg" style="white-space: nowrap;">
-        <li class="nav-item">
-          <%=link_to "All Listings", listings_path, class: "nav-link"%>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle btn btn-outline-light" data-toggle="dropdown">Listings</a>
+          <div class="dropdown-menu">
+            <%=link_to "All Listings", listings_path, class: "dropdown-item"%>    
+            <%if user_signed_in?%>
+              <%=link_to "Create Listing", new_listing_path, class: "dropdown-item"%>
+            <%end%>
+          </div>
         </li>
+       
         <%if user_signed_in?%>
         <li class="nav-item">
-          <%= link_to "Admin Panel", rails_admin_path, class:"btn btn-outline-info mb-2 lg:mr-2 lg:mb-0 block" if admin? %>
+          <%= link_to "Admin Panel", rails_admin_path, class:"nav-link btn btn-outline-primary ml-2" if admin? %>
+        </li>
+        
+        <li class="nav-item">
+          <%=link_to "My Inbox", conversations_path, class: "nav-link btn btn-outline-info ml-2"%>
         </li>
         <li class="nav-item">
-          <%=link_to "Create Listing", new_listing_path, class: "nav-link"%>
-        </li>
-        <li class="nav-item">
-          <%=link_to "My Inbox", conversations_path, class: "nav-link"%>
-        </li>
-        <li class="nav-item">
-          <%=link_to "Log Out", destroy_user_session_path, method: :delete, class: "nav-link"%>
+          <%=link_to "Log Out", destroy_user_session_path, method: :delete, class: "nav-link btn btn-outline-warning ml-2"%>
         </li>
         <%else%>
         <li class="nav-item">
-          <%= link_to "Log in", new_user_session_path, class: "nav-link"%>
+          <%= link_to "Log in", new_user_session_path, class: "nav-link btn btn-outline-success ml-2"%>
         </li>
         <li class="nav-item active">
-          <%=link_to "Sign up", new_user_registration_path, class: "nav-link btn btn-outline-info"%>
+          <%=link_to "Sign up", new_user_registration_path, class: "nav-link btn btn-outline-info ml-2"%>
         </li>
         <%end%>
       </ul>

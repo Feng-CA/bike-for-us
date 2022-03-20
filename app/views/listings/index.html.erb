@@ -6,13 +6,14 @@
         <%= render 'listings/search_form.html.erb' %>
       </div>
 
-      <div class="btn-group sort-btn">
-        <button class="btn btn-outline-info mb-2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort by</button>
+      <div class="btn-group">
+        <button class="btn btn-outline-info mb-2" type="button">Sort by</button>
+        <button class="btn btn-info mb-2 dropdown-toggle dropdown-toggle-split" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
         <ul class="dropdown-menu p-2 bg-light" style="min-width: 100%">
-          <li class="ml-2"><%=sort_link(@q, :price, "Price", default_order: :desc) %></li>
-          <li class="ml-2"><%=sort_link(@q, :size_id, "Size", default_order: :desc) %></li>
-          <li class="ml-2"><%=sort_link(@q, :state_id, "State", default_order: :desc) %></li>
-          <li class="ml-2"><%=sort_link(@q, :created_at, "Time", default_order: :desc) %></li>
+          <li class="dropdown-item"><%=sort_link(@q, :price, "Price", default_order: :desc) %></li>
+          <li class="dropdown-item"><%=sort_link(@q, :size_id, "Size", default_order: :desc) %></li>
+          <li class="dropdown-item"><%=sort_link(@q, :state_id, "State", default_order: :desc) %></li>
+          <li class="dropdown-item"><%=sort_link(@q, :created_at, "Time", default_order: :desc) %></li>
         </ul>
       </div>
     </div>
