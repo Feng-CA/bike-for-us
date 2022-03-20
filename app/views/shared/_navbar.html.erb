@@ -1,6 +1,9 @@
 <nav class="navbar navbar-light navbar-expand-md sticky-top" style="background-color: #e3f2fd;">
   <div class="container-fluid">
-    <%=link_to "Bike-For-Us", root_path, class: "navbar-brand"%>
+    <div class="logo-img d-flex">
+      <%=image_tag "logo.png", alt: "bike",class: "img-fluid"%>
+      <%=link_to "Bike-For-Us", root_path, class: "navbar-brand ml-3 h3"%>
+    </div>
   </div>
     <!-- Toggler/collapsibe Button -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -10,7 +13,7 @@
     <!-- Navbar links -->
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav mr-5-lg" style="white-space: nowrap;">
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown ml-2">
           <a class="nav-link dropdown-toggle btn btn-outline-light" data-toggle="dropdown">Listings</a>
           <div class="dropdown-menu">
             <%=link_to "All Listings", listings_path, class: "dropdown-item"%>    
