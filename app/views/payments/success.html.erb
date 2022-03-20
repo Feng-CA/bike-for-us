@@ -1,2 +1,4 @@
-<h4> Congraduations for buying <%=@order.listing.title%> </h4>
-<%=link_to "View Receipt", @order.receipt_url%>
+<div class="main-background flex-column">
+  <h2> Congraduations for buying <%=@order.listing.title%> </h2>
+  <%=link_to "View Receipt", @order.receipt_url, class: "btn btn-success ml-2 mt-5"%>
+</div>
