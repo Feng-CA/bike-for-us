@@ -1,7 +1,6 @@
 # Bike For Us - A Ruby on Rails web application
 
-## A link to your deployed app (websit)
-This is a link to my deployed app : [Bike-For-Us] (https://bike-for-us.herokuapp.com/)
+## A link to the deployed web application: [Bike-For-Us] (https://bike-for-us.herokuapp.com/)
 
 ### Purpose
 The purpose of building this two sided marketplace application is to faciliate the second hand bike trading online. This web application provides the lower cost and convinience for bike sellers and buyers to achive their goals. Also this application promotes reusing items, saving resources and protecting environment.
