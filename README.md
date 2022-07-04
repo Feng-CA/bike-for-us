@@ -1,24 +1,37 @@
-# README
+# Bike For Us - A Ruby on Rails web application
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## A link to your deployed app (websit)
+This is a link to my deployed app : [Bike-For-Us] (https://bike-for-us.herokuapp.com/)
 
-Things you may want to cover:
+### Purpose
+The purpose of building this two sided marketplace application is to faciliate the second hand bike trading online. This web application provides the lower cost and convinience for bike sellers and buyers to achive their goals. Also this application promotes reusing items, saving resources and protecting environment.
 
-* Ruby version
+### Functionality/features
+* All listings and details can be viewed by users without sign into an account.
+* This applicatuin requires both buyers and sellers to register accounts in order to trade.
+* The seller can create listing and have option to upload an image to the listing.
+* The sellers can update, delete listing if they want.
+* The buyers can search all listings with keywords and sort all listings by price, size, state and created time.
+* The buyers can message the sellers to enquire more information about the bikes they want to know.
+* The sellers can reply messages of the buyers who make enquiries about their listings.
+* The buyers can make secure payments through the website and receive receipts as the proof of success transaction.
+* The buyers can make secure payment on this application and receive receipts.
+* The admin can monitor and manage all activities of this application.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Tech stack
+* Rails
+* Postgresql
+* factory_bot_rails
+* rspec-rails
+* factory_bot_rails
+* database_cleaner
+* rails-controller-testing
+* bootstrap
+* jquery
+* popper.js
+* ransack
+* rails_admin
+* devise
+* aws-sdk-s3
+* stripe
+* heroku
